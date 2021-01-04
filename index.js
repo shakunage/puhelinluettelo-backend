@@ -64,14 +64,18 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
+
+    const ids = persons.map((person) => person.id)
+
     persons = persons.filter(person => person.id !== id)
 
-    if (!person) {
+    console.log(persons)
+
+    if (!ids.includes(id)) {
       return response.status(404).json({ 
         error: 'person not found' 
     })
-    } else 
-    response.status(204).end()
+    } response.status(204).end()
   })
 
 app.post('/api/persons', (request, response) => {
